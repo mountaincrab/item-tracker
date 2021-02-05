@@ -1,0 +1,43 @@
+{
+  "name": "item-tracker",
+  "version": "0.0.1",
+  "description": "Item Tracker UI",
+  "main": "index.js",
+  "author": "bossnutter",
+  "private": true,
+  "scripts": {
+    "start:dev": "webpack-dev-server --hot",
+    "analyze:modules": "webpack  --env.analyzeModules",
+    "build": "webpack"
+  },
+  "dependencies": {
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "rest": "^1.3.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.2",
+    "@types/autosuggest-highlight": "^3.1.0",
+    "@types/lodash.debounce": "^4.0.6",
+    "@types/material-ui": "^0.21.7",
+    "@types/react": "^16.9.38",
+    "@types/react-dom": "^16.9.8",
+    "@types/react-redux": "^7.1.9",
+    "@types/redux-logger": "^3.0.8",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^4.2.1",
+    "html-webpack-plugin": "^4.3.0",
+    "react-hot-loader": "^4.12.21",
+    "source-map-loader": "^0.2.4",
+    "style-loader": "^1.2.1",
+    "ts-loader": "^7.0.5",
+    "typescript": "^3.9.5",
+    "webpack": "^4.43.0",
+    "webpack-bundle-analyzer": "^3.8.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
+}

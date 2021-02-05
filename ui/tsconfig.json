@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "outDir": "./out/ts/",
+    "lib": ["es6", "dom"],
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "module": "commonjs",
+    "target": "es6",
+    "jsx": "react"
+  },
+  "include": [
+    "src/main/ts/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
