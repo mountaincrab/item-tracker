@@ -12,21 +12,21 @@ import org.springframework.stereotype.Component;
 @Component
 public class DatabaseLoader implements CommandLineRunner {
 
-    private final ContainerRepository containerRepository;
+  private final ContainerRepository containerRepository;
 
-    @Autowired
-    public DatabaseLoader(ContainerRepository containerRepository) {
-        this.containerRepository = containerRepository;
-    }
+  @Autowired
+  public DatabaseLoader(ContainerRepository containerRepository) {
+    this.containerRepository = containerRepository;
+  }
 
 
-    @Override
-    public void run(String... args) {
-        containerRepository.save(new Container("loft", "loft on top floor", new HashSet<>()));
+  @Override
+  public void run(String... args) {
+    containerRepository.save(new Container("loft", "loft on top floor", new HashSet<>()));
 
-        Container garage = new Container("garage", "outside garage");
-        garage.addItem(new Item("bike", "bossnut"));
-        garage.addItem(new Item("car", "passat"));
-        containerRepository.save(garage);
-    }
+    Container garage = new Container("garage", "outside garage");
+    garage.addItem(new Item("bike", "bossnut"));
+    garage.addItem(new Item("car", "passat"));
+    containerRepository.save(garage);
+  }
 }

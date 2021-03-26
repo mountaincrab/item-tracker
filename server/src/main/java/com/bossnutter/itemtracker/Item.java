@@ -8,83 +8,78 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Item {
-    private @Id @GeneratedValue Long id;
-    private String name;
-    private String description;
 
-    @ManyToOne
-    private Container container;
+  private @Id
+  @GeneratedValue
+  Long id;
+  private String name;
+  private String description;
 
-    public Item() {}
+  @ManyToOne
+  private Container container;
 
-    public Item(String name, String description) {
-        this.name = name;
-        this.description = description;
-        this.container = null;
-    }
+  public Item() {
+  }
 
-    public Item(String name, String description, Container container)
-    {
-        this.name = name;
-        this.description = description;
-        this.container = container;
-    }
+  public Item(String name, String description) {
+    this.name = name;
+    this.description = description;
+    this.container = null;
+  }
 
-    @Override
-    public boolean equals(Object o)
-    {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-        Item item = (Item) o;
-        return Objects.equals(id, item.id) && Objects.equals(name, item.name) &&
-                Objects.equals(description, item.description);
-    }
+  public Item(String name, String description, Container container) {
+    this.name = name;
+    this.description = description;
+    this.container = container;
+  }
 
-    @Override
-    public int hashCode()
-    {
-        return Objects.hash(id, name, description);
-    }
+  @Override
+  public boolean equals(Object o) {
+      if (this == o) {
+          return true;
+      }
+      if (o == null || getClass() != o.getClass()) {
+          return false;
+      }
+    Item item = (Item) o;
+    return Objects.equals(id, item.id) && Objects.equals(name, item.name) &&
+        Objects.equals(description, item.description);
+  }
 
-    public Long getId()
-    {
-        return id;
-    }
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, name, description);
+  }
 
-    public void setId(Long id)
-    {
-        this.id = id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public String getName()
-    {
-        return name;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public void setName(String name)
-    {
-        this.name = name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public String getDescription()
-    {
-        return description;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public void setDescription(String description)
-    {
-        this.description = description;
-    }
+  public String getDescription() {
+    return description;
+  }
 
-    public Container getContainer()
-    {
-        return container;
-    }
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
-    public void setContainer(Container container)
-    {
-        this.container = container;
-    }
+  public Container getContainer() {
+    return container;
+  }
+
+  public void setContainer(Container container) {
+    this.container = container;
+  }
 }
