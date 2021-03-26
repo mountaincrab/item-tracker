@@ -1,5 +1,6 @@
 package com.bossnutter.itemtracker;
 
+import com.bossnutter.itemtracker.domain.Container;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
 import org.springframework.stereotype.Component;
