@@ -3,6 +3,7 @@ package com.bossnutter.itemtracker;
 import com.bossnutter.itemtracker.domain.Container;
 import com.bossnutter.itemtracker.domain.Item;
 import com.bossnutter.itemtracker.repositories.ContainerRepository;
+import com.bossnutter.itemtracker.services.TestDataInitializer;
 import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,21 +13,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class DatabaseLoader implements CommandLineRunner {
 
-  private final ContainerRepository containerRepository;
+  private final TestDataInitializer testDataInitializer;
 
-  @Autowired
-  public DatabaseLoader(ContainerRepository containerRepository) {
-    this.containerRepository = containerRepository;
+  public DatabaseLoader(TestDataInitializer testDataInitializer) {
+    this.testDataInitializer = testDataInitializer;
   }
-
 
   @Override
   public void run(String... args) {
-    containerRepository.save(new Container("loft", "loft on top floor", new HashSet<>()));
-
-    Container garage = new Container("garage", "outside garage");
-    garage.addItem(new Item("bike", "bossnut"));
-    garage.addItem(new Item("car", "passat"));
-    containerRepository.save(garage);
+    testDataInitializer.reset();
   }
 }
