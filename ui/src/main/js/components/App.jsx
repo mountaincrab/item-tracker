@@ -1,86 +1,102 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import CreateContainerDialog from "./CreateContainerDialog";
 import ContainerList from "./ContainerList";
+import containerService from "../services/ContainerService";
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {containers: []};
-    this.refreshContainerList = this.refreshContainerList.bind(this);
-    this.createContainer = this.createContainer.bind(this);
-    this.deleteContainer = this.deleteContainer.bind(this);
-    this.deleteItem = this.deleteItem.bind(this);
+let p = new Promise((resolve, reject) => {
+  setTimeout(() => resolve(10), 1000);
+})
+.then(
+    resolved => {
+      console.log("Promise 1 resolved to " + resolved);
+      return resolved + 10;
+    },
+    rejected => {
+      console.log("Promise 1 rejected to " + rejected);
+      return rejected;
+});
+// .then(answer => new Promise(resolve, reject) => {
+//   setTimeout(() => resolve(answer))
+// });
+
+
+function App() {
+  const [containers, setContainers] = useState([]);
+
+  useEffect(() => refreshContainerList())
+
+  const refreshContainerList = () => {
+    containerService.getContainers()
+    .then((containers) => {
+      setContainers(containers);
+    });
   }
 
-  componentDidMount() {
-    this.refreshContainerList();
-  }
-
-  refreshContainerList() {
-    fetch("/api/containers")
-    .then((response) =>
-        response.json())
-    .then((responseJson) => {
-      this.setState({containers: responseJson._embedded.containers});
-    })
-  }
-
-  createContainer(container) {
-    fetch('/api/containers', {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(container)
-    }).then(response => {
+  const createContainer = (container) => {
+    containerService.createContainer(container)
+    .then(response => {
       if (response.ok) {
-        this.refreshContainerList();
+        refreshContainerList();
+      } else {
+        console.log(response)
+      }
+    });
+  }
+
+  const deleteContainer = (container) => {
+    containerService.deleteContainer(container).then(response => {
+      if (response.ok) {
+        refreshContainerList();
       } else {
         console.log(response)
       }
     })
   }
 
-  deleteContainer(container) {
-    fetch(container._links.self.href, {
-      method: 'delete'
-    }).then(response => {
+  const createItem = (item) => {
+    containerService.createItem(item)
+    .then(response => {
       if (response.ok) {
-        this.refreshContainerList();
+        refreshContainerList();
+      } else {
+        console.log(response)
+      }
+    });
+  }
+
+  const deleteItem = (item) => {
+    containerService.deleteItem(item).then(response => {
+      if (response.ok) {
+        refreshContainerList();
       } else {
         console.log(response)
       }
     })
   }
 
-  deleteItem(item) {
-    fetch(item._links.self.href, {
-      method: 'delete'
-    }).then(response => {
+  const resetContainers = () => {
+    fetch("/reset")
+    .then(response => {
       if (response.ok) {
-        this.refreshContainerList();
+        refreshContainerList();
       } else {
-        console.log(response)
+        console.log(response);
       }
-    })
+    });
   }
 
-  resetContainers() {
-    fetch("/api/containers")
-    .then((response) =>
-        response.json())
-    .then((responseJson) => {
-      this.setState({containers: responseJson._embedded.containers});
-    })
-  }
-
-  render() {
-    return (
-        <div>
-          <CreateContainerDialog createContainer={this.createContainer}/>
-          <ContainerList
-              containers={this.state.containers}
-              deleteContainer={this.deleteContainer}
-              deleteItem={this.deleteItem}/>
-        </div>
-    )
-  }
+  return (
+      <div>
+        <button onClick={resetContainers}>Reset</button>
+        <CreateContainerDialog createContainer={createContainer}/>
+        <ContainerList
+            containers={containers}
+            // callbacks={{deleteContainer: deleteContainer}}
+            deleteContainer={deleteContainer}
+            createItem={createItem}
+            deleteItem={deleteItem}/>
+      </div>
+  )
 }
+
+export default App;

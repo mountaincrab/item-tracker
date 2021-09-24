@@ -1,46 +1,29 @@
 import React from "react";
 import Item from "./Item"
+import CreateItemDialog from "./CreateItemDialog";
 
-export default class Container extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {items: []};
-  }
-
-  componentDidMount() {
-    this.refreshItems();
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // TODO ccrabtree Cal refreshItems in click handler - call delete callback, then refreshItems.
-    this.refreshItems();
-  }
-
-  refreshItems() {
-    fetch(this.props.container._links.items.href)
-    .then((response) => response.json())
-    .then((responseJson) => {
-      this.setState({items: responseJson._embedded.items})
-    })
-  }
-
-  render() {
-    return (
-        <div className="container">
-          <p>Name: {this.props.container.name}</p>
-          <p>Description: {this.props.container.description}</p>
-          <p>Items: </p>
-          {this.state.items.map((item) =>
-              <Item
-                  key={item._links.self.href}
-                  item={item}
-                  deleteItem={this.props.deleteItem}/>
-          )}
-          <button
-              onClick={() => this.props.deleteContainer(this.props.container)}>
-            Delete
-          </button>
-        </div>
-    )
-  }
+function Container(props) {
+  return (
+      <div className="container">
+        <p>Name: {props.container.name}</p>
+        <p>Description: {props.container.description}</p>
+        <p>Items: </p>
+        {props.container.items.map((item) =>
+            <Item
+                key={item.id}
+                item={item}
+                deleteItem={props.deleteItem}/>
+        )}
+        <CreateItemDialog
+            createItem={props.createItem}
+            containerId={props.container.id}
+            createItem2={(item) => props.createItem(Object.assign(item, {container: {id: props.container.id}}))}/>
+        <button
+            onClick={() => props.deleteContainer(props.container)}>
+          Delete Container
+        </button>
+      </div>
+  )
 }
+
+export default Container;

@@ -1,6 +1,7 @@
 package com.bossnutter.itemtracker;
 
 import com.bossnutter.itemtracker.domain.Container;
+import com.bossnutter.itemtracker.domain.Item;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
 import org.springframework.stereotype.Component;
@@ -13,5 +14,6 @@ public class CustomisedRestMvcConfiguration implements RepositoryRestConfigurer 
   public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config,
       CorsRegistry cors) {
     config.exposeIdsFor(Container.class);
+    config.exposeIdsFor(Item.class);
   }
 }

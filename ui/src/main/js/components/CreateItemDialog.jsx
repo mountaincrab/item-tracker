@@ -1,12 +1,16 @@
 import React, {useState} from "react";
 
-function CreateContainerDialog(props) {
+function CreateItemDialog(props) {
 
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
 
   const handleSubmit = (e) => {
-    props.createContainer({
+    props.createItem({
+      container: {
+        id: props.containerId
+      },
+      // container_id: props.containerId,
       name: name,
       description: description
     });
@@ -17,7 +21,7 @@ function CreateContainerDialog(props) {
 
   return (
       <div>
-        <h2>Create container</h2>
+        <p>Create item:</p>
         <form onSubmit={handleSubmit}>
           <label>
             Name:
@@ -36,10 +40,10 @@ function CreateContainerDialog(props) {
                 value={description}
                 onChange={e => setDescription(e.target.value)}/>
           </label>
-          <input type="submit" value="Create Container"/>
+          <input type="submit" value="Create Item"/>
         </form>
       </div>
   )
 }
 
-export default CreateContainerDialog;
+export default CreateItemDialog;

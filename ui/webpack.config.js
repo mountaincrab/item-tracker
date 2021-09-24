@@ -57,11 +57,12 @@ module.exports = (env) => {
             ]
         },
         plugins: plugins,
+        devtool: 'inline-source-map',
         devServer: {
             compress: false,
             port: 9001,
             proxy: {
-                '/api': 'http://localhost:8080'
+                '/': 'http://localhost:8080'
             }
         },
     };
