@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from "react";
-import CreateContainerDialog from "./CreateContainerDialog";
-import ContainerList from "./ContainerList";
+import CreateItemContainerDialog from "./CreateItemContainerDialog";
+import ItemContainerList from "./ItemContainerList";
+
 
 import containerService from "../services/ContainerService";
+import {Container, Button} from "@mui/material";
 
 
 function App() {
@@ -59,7 +61,7 @@ function App() {
     })
   }
 
-  const resetContainers = () => {
+  const resetItemContainers = () => {
     fetch("/reset")
     .then(response => {
       if (response.ok) {
@@ -71,17 +73,16 @@ function App() {
   }
 
   return (
-      <div>
-        <Button>test</Button>
-        <button onClick={resetContainers}>Reset</button>
-        <CreateContainerDialog createContainer={createContainer}/>
-        <ContainerList
+      <Container>
+        <Button variant={"contained"} onClick={resetItemContainers}>Reset</Button>
+        <CreateItemContainerDialog createContainer={createContainer}/>
+        <ItemContainerList
             containers={containers}
             // callbacks={{deleteContainer: deleteContainer}}
             deleteContainer={deleteContainer}
             createItem={createItem}
             deleteItem={deleteItem}/>
-      </div>
+      </Container>
   )
 }
 

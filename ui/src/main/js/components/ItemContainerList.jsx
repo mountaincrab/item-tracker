@@ -1,12 +1,12 @@
 import React from "react";
-import Container from "./Container";
+import ItemContainer from "./ItemContainer";
 
-function ContainerList(props) {
+function ItemContainerList(props) {
   return (
       <div className="container-list">
         <p>We have {props.containers.length} containers</p>
         {props.containers.map((container, index) =>
-            <Container
+            <ItemContainer
                 key={container.id}
                 container={container}
                 deleteContainer={props.deleteContainer}
@@ -18,4 +18,4 @@ function ContainerList(props) {
   )
 }
 
-export default ContainerList;
+export default ItemContainerList;

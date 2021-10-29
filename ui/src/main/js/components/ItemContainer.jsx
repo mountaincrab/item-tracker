@@ -2,7 +2,7 @@ import React from "react";
 import Item from "./Item"
 import CreateItemDialog from "./CreateItemDialog";
 
-function Container(props) {
+function ItemContainer(props) {
   return (
       <div className="container">
         <p>Name: {props.container.name}</p>
@@ -26,4 +26,4 @@ function Container(props) {
   )
 }
 
-export default Container;
+export default ItemContainer;

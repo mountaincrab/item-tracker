@@ -1,5 +1,5 @@
 
-class ContainerService {
+class ItemContainerService {
   getContainers() {
     return fetch("/api/containers")
       .then(response =>
@@ -54,6 +54,6 @@ class ContainerService {
 
 }
 
-const instance = new ContainerService();
+const instance = new ItemContainerService();
 
 export default instance;
