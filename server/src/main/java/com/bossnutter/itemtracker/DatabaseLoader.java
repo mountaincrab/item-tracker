@@ -1,12 +1,7 @@
 package com.bossnutter.itemtracker;
 
-import com.bossnutter.itemtracker.domain.Container;
-import com.bossnutter.itemtracker.domain.Item;
-import com.bossnutter.itemtracker.repositories.ContainerRepository;
 import com.bossnutter.itemtracker.services.TestDataInitializer;
-import java.util.HashSet;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 

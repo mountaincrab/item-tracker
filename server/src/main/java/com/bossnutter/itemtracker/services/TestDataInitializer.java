@@ -1,9 +1,9 @@
 package com.bossnutter.itemtracker.services;
 
-import com.bossnutter.itemtracker.domain.Container;
-import com.bossnutter.itemtracker.domain.Item;
-import com.bossnutter.itemtracker.repositories.ContainerRepository;
-import com.bossnutter.itemtracker.repositories.ItemRepository;
+import com.bossnutter.itemtracker.containers.domain.Container;
+import com.bossnutter.itemtracker.containers.domain.Item;
+import com.bossnutter.itemtracker.containers.repository.ContainerRepository;
+import com.bossnutter.itemtracker.containers.repository.ItemRepository;
 import java.util.HashSet;
 import org.springframework.stereotype.Service;
 

@@ -10,13 +10,13 @@ import {Container, Button} from "@mui/material";
 function App() {
   const [containers, setContainers] = useState([]);
 
-  useEffect(() => refreshContainerList())
+  useEffect(() => refreshContainerList(), [])
 
   const refreshContainerList = () => {
     containerService.getContainers()
-    .then((containers) => {
-      setContainers(containers);
-    });
+      .then((containers) => {
+        setContainers(containers);
+      });
   }
 
   const createContainer = (container) => {

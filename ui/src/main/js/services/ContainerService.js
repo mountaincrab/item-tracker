@@ -1,25 +1,9 @@
 
 class ItemContainerService {
   getContainers() {
-    return fetch("/api/containers")
+    return fetch("/api/v1/containers")
       .then(response =>
-        response.json())
-      .then(response =>
-        response._embedded.containers.map(container => {
-          return {
-            id: container.id,
-            name: container.name,
-            description: container.description,
-            items: container.items.map(item => {
-              return {
-                id: item.id,
-                name: item.name,
-                description: item.description
-              }
-            })
-          }
-        })
-      );
+        response.json());
   }
 
   createContainer(container) {

@@ -1,4 +1,4 @@
-package com.bossnutter.itemtracker.domain;
+package com.bossnutter.itemtracker.containers.domain;
 
 import java.util.Objects;
 import javax.persistence.Entity;
