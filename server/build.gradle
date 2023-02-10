@@ -23,3 +23,34 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+tasks.register("buildDockerImage", Exec) {
+    group = "docker"
+    executable = "docker"
+    args = [
+            "build",
+            "--build-arg",
+            "JAR_FILE=./build/libs/${project.name}-${project.version}.jar",
+            "-t",
+            "item-tracker:latest",
+            "-t",
+            "713056659575.dkr.ecr.eu-west-1.amazonaws.com/item-tracker:latest",
+            "."
+    ]
+}
+
+tasks.register("loginToEcr", Exec) {
+    group = "docker"
+    commandLine = ["bash", "-c", "aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 713056659575.dkr.ecr.eu-west-1.amazonaws.com"]
+}
+
+tasks.register("pushDockerImage", Exec) {
+    group ="docker"
+    dependsOn = ["loginToEcr"]
+    executable = "docker"
+    args = [
+            "push",
+            "713056659575.dkr.ecr.eu-west-1.amazonaws.com/item-tracker:latest"
+    ]
+
+}
