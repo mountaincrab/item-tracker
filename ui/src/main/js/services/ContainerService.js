@@ -1,10 +1,4 @@
-
 class ItemContainerService {
-
-
-
-  constructor() {
-  }
 
   getContainers() {
     return fetch("/api/v1/containers")

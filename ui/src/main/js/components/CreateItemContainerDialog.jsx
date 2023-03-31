@@ -32,7 +32,7 @@ function CreateItemContainerDialog(props) {
               value={description}
               onChange={(e) => setDescription(e.target.value)}/>
 
-          <Button variant={"contained"}>Create ItemContainer</Button>
+          <Button type="submit" variant={"contained"}>Create ItemContainer</Button>
         </form>
       </Container>
   )

@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from "react";
+import "regenerator-runtime";
+
 import CreateItemContainerDialog from "./CreateItemContainerDialog";
 import ItemContainerList from "./ItemContainerList";
 
@@ -8,21 +10,23 @@ import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
 import Profile from "./Profile";
 import {useAuth0} from "@auth0/auth0-react";
+import {useApiClient} from "../hooks/useApiClient/useApiClient";
 
 function App() {
   const [containers, setContainers] = useState([]);
+  const { getContainers, createContainer, deleteContainer, createItem, deleteItem } = useApiClient();
 
   useEffect(() => refreshContainerList(), [])
 
   const refreshContainerList = () => {
-    containerService.getContainers()
+    getContainers()
         .then((containers) => {
           setContainers(containers);
         });
   }
 
-  const createContainer = (container) => {
-    containerService.createContainer(container)
+  const createContainerHandler = (container) => {
+    createContainer(container)
         .then(response => {
           if (response.ok) {
             refreshContainerList();
@@ -32,8 +36,8 @@ function App() {
         });
   }
 
-  const deleteContainer = (container) => {
-    containerService.deleteContainer(container).then(response => {
+  const deleteContainerHandler = (container) => {
+    deleteContainer(container).then(response => {
       if (response.ok) {
         refreshContainerList();
       } else {
@@ -42,8 +46,8 @@ function App() {
     })
   }
 
-  const createItem = (item) => {
-    containerService.createItem(item)
+  const createItemHandler = (item) => {
+    createItem(item)
         .then(response => {
           if (response.ok) {
             refreshContainerList();
@@ -53,8 +57,8 @@ function App() {
         });
   }
 
-  const deleteItem = (item) => {
-    containerService.deleteItem(item).then(response => {
+  const deleteItemHandler = (item) => {
+    deleteItem(item).then(response => {
       if (response.ok) {
         refreshContainerList();
       } else {
@@ -87,13 +91,13 @@ function App() {
         <p>Access token: </p>
         <pre id="access-token"></pre>
         <Button variant={"contained"} onClick={resetItemContainers}>Reset</Button>
-        <CreateItemContainerDialog createContainer={createContainer}/>
+        <CreateItemContainerDialog createContainer={createContainerHandler}/>
         <ItemContainerList
             containers={containers}
             // callbacks={{deleteContainer: deleteContainer}}
-            deleteContainer={deleteContainer}
-            createItem={createItem}
-            deleteItem={deleteItem}/>
+            deleteContainer={deleteContainerHandler}
+            createItem={createItemHandler}
+            deleteItem={deleteItemHandler}/>
       </Container>
   )
 }
