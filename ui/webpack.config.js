@@ -60,7 +60,7 @@ module.exports = (env) => {
         devtool: 'inline-source-map',
         devServer: {
             compress: false,
-            port: 9001,
+            port: 3000,
             proxy: {
                 '/': 'http://localhost:8080'
             }

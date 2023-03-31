@@ -2,10 +2,11 @@ import React, {useEffect, useState} from "react";
 import CreateItemContainerDialog from "./CreateItemContainerDialog";
 import ItemContainerList from "./ItemContainerList";
 
-
 import containerService from "../services/ContainerService";
-import {Container, Button} from "@mui/material";
-
+import {Button, Container} from "@mui/material";
+import LoginButton from "./LoginButton";
+import LogoutButton from "./LogoutButton";
+import Profile from "./Profile";
 
 function App() {
   const [containers, setContainers] = useState([]);
@@ -74,6 +75,9 @@ function App() {
 
   return (
       <Container>
+        <LoginButton/>
+        <LogoutButton/>
+        <Profile/>
         <Button variant={"contained"} onClick={resetItemContainers}>Reset</Button>
         <CreateItemContainerDialog createContainer={createContainer}/>
         <ItemContainerList
