@@ -2,17 +2,19 @@ spring:
   datasource:
     url: jdbc:h2:mem:testdb
 
-#  security:
-#    oauth2:
-#      resourceserver:
-#        jwt:
-#          issuer-uri: http://localhost:8083/auth/realms/baeldung
-#          jwk-set-uri: http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/certs
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://dev-2taep7x6uivvo7zb.eu.auth0.com/
 
   h2:
     console:
       enabled: true
 
+#logging:
+#  level:
+#    root: DEBUG
 
 #spring.datasource.driverClassName=org.h2.Driver
 #spring.datasource.username=sa

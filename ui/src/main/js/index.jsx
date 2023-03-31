@@ -9,6 +9,7 @@ ReactDOM.render(
         domain="dev-2taep7x6uivvo7zb.eu.auth0.com"
         clientId="apwERGXcHpdVt0N2DIZswBhMuqFeVHJq"
         authorizationParams={{
+            audience: "https://test-api.bossnutter.com",
             redirect_uri: window.location.origin
         }}
         >

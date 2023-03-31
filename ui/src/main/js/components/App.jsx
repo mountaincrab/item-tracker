@@ -7,6 +7,7 @@ import {Button, Container} from "@mui/material";
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
 import Profile from "./Profile";
+import {useAuth0} from "@auth0/auth0-react";
 
 function App() {
   const [containers, setContainers] = useState([]);
@@ -15,20 +16,20 @@ function App() {
 
   const refreshContainerList = () => {
     containerService.getContainers()
-      .then((containers) => {
-        setContainers(containers);
-      });
+        .then((containers) => {
+          setContainers(containers);
+        });
   }
 
   const createContainer = (container) => {
     containerService.createContainer(container)
-    .then(response => {
-      if (response.ok) {
-        refreshContainerList();
-      } else {
-        console.log(response)
-      }
-    });
+        .then(response => {
+          if (response.ok) {
+            refreshContainerList();
+          } else {
+            console.log(response)
+          }
+        });
   }
 
   const deleteContainer = (container) => {
@@ -43,13 +44,13 @@ function App() {
 
   const createItem = (item) => {
     containerService.createItem(item)
-    .then(response => {
-      if (response.ok) {
-        refreshContainerList();
-      } else {
-        console.log(response)
-      }
-    });
+        .then(response => {
+          if (response.ok) {
+            refreshContainerList();
+          } else {
+            console.log(response)
+          }
+        });
   }
 
   const deleteItem = (item) => {
@@ -64,13 +65,18 @@ function App() {
 
   const resetItemContainers = () => {
     fetch("/reset")
-    .then(response => {
-      if (response.ok) {
-        refreshContainerList();
-      } else {
-        console.log(response);
-      }
-    });
+        .then(response => {
+          if (response.ok) {
+            refreshContainerList();
+          } else {
+            console.log(response);
+          }
+        });
+  }
+
+  const {isAuthenticated, getAccessTokenSilently} = useAuth0();
+  if (isAuthenticated) {
+    getAccessTokenSilently().then(token => document.getElementById("access-token").innerText = JSON.stringify(token));
   }
 
   return (
@@ -78,6 +84,8 @@ function App() {
         <LoginButton/>
         <LogoutButton/>
         <Profile/>
+        <p>Access token: </p>
+        <pre id="access-token"></pre>
         <Button variant={"contained"} onClick={resetItemContainers}>Reset</Button>
         <CreateItemContainerDialog createContainer={createContainer}/>
         <ItemContainerList
