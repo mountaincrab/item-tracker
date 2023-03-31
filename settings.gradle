@@ -2,6 +2,5 @@ rootProject.name = 'item-tracker'
 
 include(
         "server",
-        "ui",
-        "auth-server"
+        "ui"
 )

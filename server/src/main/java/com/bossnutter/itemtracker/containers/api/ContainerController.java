@@ -4,7 +4,6 @@ import com.bossnutter.itemtracker.containers.ContainerMapper;
 import com.bossnutter.itemtracker.containers.api.response.ContainerResponse;
 import com.bossnutter.itemtracker.containers.repository.ContainerRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,15 +26,6 @@ public class ContainerController {
 
     @GetMapping("/containers")
     public List<ContainerResponse> getContainers() {
-        return containerRepository.findAll()
-                .stream()
-                .map(containerMapper::domainToResponse)
-                .toList();
-    }
-
-    @CrossOrigin(origins = "*")
-    @GetMapping("/containers-new")
-    public List<ContainerResponse> getContainersNew() {
         return containerRepository.findAll()
                 .stream()
                 .map(containerMapper::domainToResponse)
